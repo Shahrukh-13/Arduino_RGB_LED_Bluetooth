@@ -41,7 +41,7 @@ void loop()
           while(Serial.available())
           {
           data=Serial.read();                 // read incoming data byte
-           res[i]=data;                       // Add data to receiver character array1
+           res[i]=data;                       // Add data to receiver character array
             i++;                              // increment index of receiver character array
         }
         }
@@ -49,7 +49,7 @@ void loop()
         
     String r(res);                                              // Convert character array to string r
 
-    Serial.println(r);
+    //Serial.println(r);
     String red=r.substring(0,r.indexOf('.'));                           // Red color value in string format
                                                                         // From start of string r to character '.'
                                                                                                     
