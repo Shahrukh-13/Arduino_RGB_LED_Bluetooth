@@ -1,7 +1,7 @@
 #include <EEPROM.h>
 
 char data;     // Varriabel for reading incoming byte over serial port 
-char res[100]; // Character array for storing read bytes
+char res[100]; // Receiver character array for storing read bytes
 int i;         // Varriable for incrementing char array index
 
 
@@ -34,25 +34,36 @@ Serial.flush();
 }
 void loop()
 {
-  i=0;   
-  while( data!=')')     
+  i=0;     // Set the index of receiver character array to 0 at the start of loop
+  
+  while( data!=')')                             // The incoming data is in format "R.G.B.)" ; therefore read data until ')' is received
         {
           while(Serial.available())
           {
-          data=Serial.read();
-           res[i]=data;
-            i++;
+          data=Serial.read();                 // read incoming data byte
+           res[i]=data;                       // Add data to receiver character array1
+            i++;                              // increment index of receiver character array
         }
         }
-        data=0;
-    String r(res);   
-    String red=r.substring(0,r.indexOf('.'));                           // Red color value in string format                            
-    String r2=r.substring(r.indexOf('.')+1, r.indexOf(')'));
+        data=0;                   // After reading the message set 'data' to 0
+        
+    String r(res);                                              // Convert character array to string r
+
+    Serial.println(r);
+    String red=r.substring(0,r.indexOf('.'));                           // Red color value in string format
+                                                                        // From start of string r to character '.'
+                                                                                                    
+    String r2=r.substring(r.indexOf('.')+1, r.indexOf(')'));           // r2 is Substring of r with Red color value removed
+             
     
     String green=r2.substring(0,r2.indexOf('.'));                      // Green color value in string format  
-    String r3=r2.substring(r2.indexOf('.')+1, r2.indexOf(')'));
+                                                                       // From start of string r2 to character '.'
 
-    String blue=r3.substring(0,r3.indexOf('.'));                       // Blue color value in string format  
+                                                                       
+    String r3=r2.substring(r2.indexOf('.')+1, r2.indexOf(')'));       // r3 is Substring of r2 with Green color value removed
+
+    String blue=r3.substring(0,r3.indexOf('.'));                       // Blue color value in string format
+                                                                       // From start of string r3 to character '.'  
 
     //String color=red + "," + green + "," + blue;
     
