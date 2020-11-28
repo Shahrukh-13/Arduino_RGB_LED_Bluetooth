@@ -13,13 +13,22 @@ int id;
 
 void setup()
 {
-pinMode(9,INPUT);
-pinMode(10,INPUT);
-pinMode(11,INPUT);
+pinMode(9,INPUT);    // Switch-1
+pinMode(10,INPUT);   // Switch-2
+pinMode(11,INPUT);   // Switch-3
 
 digitalWrite(9,HIGH);
 digitalWrite(10,HIGH);
 digitalWrite(11,HIGH);
+
+
+pinMode(8,OUTPUT);  // Switch-1 LED
+pinMode(7,OUTPUT);  // Switch-2 LED
+pinMode(6,OUTPUT);  // Switch-3 LED
+
+digitalWrite(8,LOW);
+digitalWrite(7,LOW);
+digitalWrite(6,LOW);
 
 Serial.begin(9600);
 Serial.flush();
@@ -27,11 +36,15 @@ Serial.flush();
 }
 void loop()
 {
+
+  
+  
   i=0;   
   j=0;
 
   while( data!=')')   
         {
+          updateID();
           while(Serial.available())
           {
           data=Serial.read();
@@ -55,25 +68,8 @@ void loop()
     G=green.toInt();
     B=blue.toInt();*/
     
-    if(digitalRead(9) == HIGH && digitalRead(10) == HIGH && digitalRead(11) == HIGH)
-    {
-      id = 0;
-    }
-
-    if(digitalRead(9) == LOW && digitalRead(10) == HIGH && digitalRead(11) == HIGH)
-    {
-      id = 1;
-    }
-
-     if(digitalRead(9) == HIGH && digitalRead(10) == LOW && digitalRead(11) == HIGH)
-    {
-      id = 2;
-    }
-
-      if(digitalRead(9) == HIGH && digitalRead(10) == HIGH && digitalRead(11) == LOW)
-    {
-      id = 3;
-    }
+    //updateID();
+    
     String ID(id);
 
     String RGB = ID + "." + red + "." + green + "." + blue + "." + ")" + "\n";
@@ -87,3 +83,40 @@ void loop()
 }
     
 }
+
+void updateID()   // This function reads switches and updates IDs and LEDs accordingly
+{
+
+    if(digitalRead(11) == LOW && digitalRead(10) == HIGH && digitalRead(9) == HIGH)
+    {
+      id = 1;
+      digitalWrite(8,HIGH);
+      digitalWrite(7,LOW);
+      digitalWrite(6,LOW);
+    }
+
+     else if(digitalRead(11) == HIGH && digitalRead(10) == LOW && digitalRead(9) == HIGH)
+    {
+      id = 2;
+      digitalWrite(8,LOW);
+      digitalWrite(7,HIGH);
+      digitalWrite(6,LOW);
+    }
+
+      else if(digitalRead(11) == HIGH && digitalRead(10) == HIGH && digitalRead(9) == LOW)
+    {
+      id = 3;
+      digitalWrite(8,LOW);
+      digitalWrite(7,LOW);
+      digitalWrite(6,HIGH);
+    }
+    else
+    {
+      id = 0;
+      digitalWrite(8,HIGH);
+      digitalWrite(7,HIGH);
+      digitalWrite(6,HIGH);
+    }
+}
+
+
