@@ -13,9 +13,9 @@ int id;
 
 void setup()
 {
-pinMode(9,INPUT);    // Switch-1
+pinMode(9,INPUT);    // Switch-3
 pinMode(10,INPUT);   // Switch-2
-pinMode(11,INPUT);   // Switch-3
+pinMode(11,INPUT);   // Switch-1
 
 digitalWrite(9,HIGH);
 digitalWrite(10,HIGH);
