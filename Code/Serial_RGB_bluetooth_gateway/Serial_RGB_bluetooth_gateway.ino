@@ -86,8 +86,14 @@ void loop()
 
 void updateID()   // This function reads switches and updates IDs and LEDs accordingly
 {
-
-    if(digitalRead(11) == LOW && digitalRead(10) == HIGH && digitalRead(9) == HIGH)
+    if(digitalRead(11) == LOW && digitalRead(10) == LOW && digitalRead(9) == LOW)
+    {
+      id = 0;
+      digitalWrite(8,HIGH);
+      digitalWrite(7,HIGH);
+      digitalWrite(6,HIGH);
+    }
+    else if(digitalRead(11) == LOW && digitalRead(10) == HIGH && digitalRead(9) == HIGH)
     {
       id = 1;
       digitalWrite(8,HIGH);
@@ -112,10 +118,10 @@ void updateID()   // This function reads switches and updates IDs and LEDs accor
     }
     else
     {
-      id = 0;
-      digitalWrite(8,HIGH);
-      digitalWrite(7,HIGH);
-      digitalWrite(6,HIGH);
+      id = 999;
+      digitalWrite(8,LOW);
+      digitalWrite(7,LOW);
+      digitalWrite(6,LOW);
     }
 }
 
