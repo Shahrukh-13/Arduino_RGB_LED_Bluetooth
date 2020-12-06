@@ -60,7 +60,7 @@ void loop()
     String red=r2.substring(0,r2.indexOf('.'));                         // Red color value in string format
                                                                         // From start of string r2 to character '.'
     
-    String r3=r2.substring(r2.indexOf('.')+1, r2.indexOf(')'));         // r3 is Substring of r2 with Red color value removed
+    String r3=r2.substring(r2.indexOf('.')+1, r2.indexOf(')'));          
     
     String green=r3.substring(0,r3.indexOf('.'));                       // Green color value in string format
                                                                         // From start of string r3 to character '.'
