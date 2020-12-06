@@ -15,7 +15,7 @@ int addG=1;  // Address for storing Red color value (0-255) in EEPROM
 int addB=2;  // Address for storing Red color value (0-255) in EEPROM
 
 int id_broadcast = 0;    // Broadcast id is 0
-int id_model = 2;        // Model ID 
+int id_model = 3;        // Model ID 
    
 void setup()
 {
@@ -39,7 +39,7 @@ void loop()
 {
   i=0;                  // Set the index of receiver character array to 0 at the start of loop
   
-  while( data!='\n')                       // The incoming data is in format "ID.R.G.B.)" ; therefore read data until ')' is received   
+  while( data!=')')                       // The incoming data is in format "ID.R.G.B.)" ; therefore read data until ')' is received   
         {
           while(Serial.available())
           {
